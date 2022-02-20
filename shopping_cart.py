@@ -1,6 +1,10 @@
 # Ask the user four bits of input: Do you want to : Show/Add/Delete or Quit?
 
 class ShoppingCart():
+
+    def __init__(self):
+        self.cart_items = []
+
     # defines options menu for the user to use
     def chooseOption(self):
         action = input(
@@ -45,7 +49,7 @@ class ShoppingCart():
         )
 
         # empty string for items in cart
-        cart_items = []
+        #cart_items = []
         # blank action value
 
 
@@ -57,7 +61,7 @@ class ShoppingCart():
 
             # prints the list
             if option.lower() == 's':
-                if not cart_items: # print another message if the list is empty
+                if not self.cart_items: # print another message if the list is empty
                     print(
                         '\n'
                         '--- Nothing in cart, please add items. ---'
@@ -69,15 +73,15 @@ class ShoppingCart():
                         'Shopping List: \n',
                         #*cart_items, sep = "\n"
                     )
-                    for x in range(len(cart_items)):
-                        print(f"-{cart_items[x].title()}")
+                    for x in range(len(self.cart_items)):
+                        print(f"-{self.cart_items[x].title()}")
                     print('____________________')
             # add option
             elif option.lower() == 'a':
                 temp_item = ''
                 while temp_item != 'o': # argument to keep repeating as long as item entered isn't 'O'
                     temp_item = ShoppingCart.getItem(self)
-                    if temp_item in cart_items:
+                    if temp_item in self.cart_items:
                         print(
                             '\n'
                             '--- Item already in cart, please enter a new option. ---' # could build out later to include an option to enter another item
@@ -89,15 +93,15 @@ class ShoppingCart():
                             '--- Please enter an item to ADD. ---'
                             )
                     else:
-                        cart_items.append(temp_item.strip()) # added strip to remove extra spaces before and after item entered
-                cart_items.remove('o') # removes the 'o' that is entered before heading to options menu
+                        self.cart_items.append(temp_item.strip()) # added strip to remove extra spaces before and after item entered
+                self.cart_items.remove('o') # removes the 'o' that is entered before heading to options menu
             # remove option
             elif option.lower() == 'r':
                 temp_remove = ''
                 while temp_remove != 'o': # argument to keep repeating as long as item entered isn't 'O'
                     temp_remove = ShoppingCart.removeItem(self)
-                    if temp_remove in cart_items:
-                        cart_items.remove(temp_remove.strip()) # added strip to remove extra spaces before and after item entered
+                    if temp_remove in self.cart_items:
+                        self.cart_items.remove(temp_remove.strip()) # added strip to remove extra spaces before and after item entered
                     elif temp_remove == '': # deals with user not entering anything
                         print(
                             '\n'
@@ -115,8 +119,8 @@ class ShoppingCart():
                     'Shopping List: \n',
                         #*cart_items, sep = "\n"
                 )
-                for x in range(len(cart_items)):
-                    print(f"-{cart_items[x].title()}")
+                for x in range(len(self.cart_items)):
+                    print(f"-{self.cart_items[x].title()}")
                 print(
                     '\n'
                     '_______________________________________________________\n'
